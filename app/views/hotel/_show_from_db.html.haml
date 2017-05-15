@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-md-12
+      %h1 hello world
+      %p #{request.path}
+      %p #{@hotel.title}
+      %p #{@hotel.hotel_name}
+      %p #{@hotel.address}
+      %p #{@hotel.reviews}
+      %p #{@hotel.important_facilities}
+      %p #{@hotel.reasons}
+      %p #{@hotel.hotel_desc}
+      %p #{@hotel.rooms_table}
+      %p #{@hotel.surroundings}
+      %p #{@hotel.facilities}
+      %p #{@hotel.usp}
+      %p #{@hotel.policies}
+      %p
+        - @hotel.images.split(',').each do |image|
+          %img{src: "#{image}"}

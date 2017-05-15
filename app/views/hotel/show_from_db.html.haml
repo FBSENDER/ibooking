@@ -1,0 +1,53 @@
+- title("#{@hotel.hotel_name}, #{@hotel.country_name}, #{@hotel.region_name + ', ' unless @hotel.region_name.empty?}#{@hotel.city_name} - booking hotels on iBooking.site")
+- keywords("#{@hotel.hotel_name},#{@hotel.country_name} hotel,#{@hotel.region_name} hotel,#{@hotel.city_name} hotel,#{@hotel.hotel_name} booking")
+- head_desc("#{@hotel.hotel_desc[0..200]}...iBooking.site.")
+
+%article.container
+  .row
+    .col-md-12
+      %h1.page-header #{@hotel.title}
+      %p.alert.alert-info
+        Country: #{@hotel.country_name}
+        %br
+        Region: #{@hotel.region_name}
+        %br
+        City: #{@hotel.city_name}
+        %br
+        Address: #{@hotel.address}
+      %p.alert.alert-info #{@hotel.hotel_desc}
+      %p.alert.alert-warning 
+        some pictures of 
+        %a{href: "#{request.path}"} #{@hotel.hotel_name}
+      - @hotel.images.split(',').sample(6).each_with_index do |image, index|
+        .col-md-4
+          %img.img-responsive{src: "#{image}", alt: "#{@hotel.hotel_name} picture #{index + 1}"}
+  .row
+    .col-md-12 
+      %h2.page-header #{@hotel.hotel_name} Reviews
+      %p.alert.alert-info #{@hotel.reviews}
+      %h2.page-header Facilities of #{@hotel.hotel_name}
+      %p.alert.alert-success #{@hotel.important_facilities}
+      %p.alert.alert-info #{@hotel.facilities}
+      %h2.page-header Availability Room Infos of #{@hotel.hotel_name}
+      %p.alert.alert-info #{@hotel.rooms_table}
+      %h2.page-header Reasons to Choose #{@hotel.hotel_name}
+      %p.alert.alert-info #{@hotel.reasons}
+      %h2.page-header Area Info (Surroundings of #{@hotel.hotel_name})
+      %p.alert.alert-info #{@hotel.surroundings}
+      %h3.page-header USP
+      %p.alert.alert-info #{@hotel.usp}
+      %h3.page-header Good To Know
+      %p.alert.alert-info #{@hotel.policies}
+  .row
+    .col-md-12
+      %h3.page-header More Pictures of #{@hotel.hotel_name}
+      - @hotel.images.split(',').sample(12).each_with_index do |image, index|
+        .col-md-4
+          %img.img-responsive{src: "#{image}", alt: "#{@hotel.hotel_name} picture #{index + 6}"}
+  .row
+    .col-md-12
+      %h2.page-header More Related Hotels
+      %ul
+        - @related_hotels.each do |hotel|
+          %li
+            %a{href: "#{hotel.url_path}"} #{hotel.hotel_name}
